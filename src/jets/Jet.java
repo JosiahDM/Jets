@@ -10,6 +10,7 @@ public class Jet {
 	private float price;
 	static int jetsTotal = 0;
 	private int jetId = 0;
+	private Pilot pilot;
 	
 	public Jet(String model, float speed, int range, float price) {
 		this.model = model;
@@ -21,18 +22,36 @@ public class Jet {
 
 	// Methods
 	public void display() {
-		System.out.printf("%-5d %-20s Mach %-10.1f %-10d %-,15.2f\n", jetId, model, speed, range, price);
+		String myPilot = "";
+		if (this.pilot == null) {
+			myPilot = "N/A";
+		} else {
+			myPilot = this.pilot.getName();
+		}
+		System.out.printf("%-5d %-30s %-20s Mach %-10.1f %-10d %-,15.2f\n", jetId, myPilot, model, speed, range, price);
 	}
 	
 	
 	
 	// Setters and Getters
+	public void setPilot(Pilot pilot) {
+		this.pilot = pilot;
+	}
+	
+	public Pilot getPilot() {
+		return this.pilot;
+	}
+	
 	public String getModel() {
 		return model;
 	}
 
 	public void setModel(String model) {
-		this.model = model;
+		if (model.equals("")) {
+			this.model = "*Model Not Entered*";
+		} else {
+			this.model = model;			
+		}
 	}
 
 	public float getSpeed() {
@@ -61,6 +80,9 @@ public class Jet {
 		this.price = price;
 	}
 	
+	public int getJetId() {
+		return this.jetId;
+	}
 	
 	
 }

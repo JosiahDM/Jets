@@ -1,11 +1,9 @@
 package jets;
 
-// Fleet contains minimum 5 Jets. 
-
-
 public class Fleet {
 	private Jet[] jetsArray;
 	private String name;
+	private Pilot[] pilots;
 	
 	public Fleet(String name, Jet[] jetsArray) {
 		this.name = name;
@@ -44,7 +42,7 @@ public class Fleet {
 		int range = 0;
 		Jet longestRange = null;
 		for (Jet jet : jetsArray) {
-			if (jet.getSpeed() > range) {
+			if (jet.getRange() > range) {
 				range = jet.getRange();
 				longestRange = jet;
 			}
@@ -57,12 +55,58 @@ public class Fleet {
 	}
 	
 	// A user can add custom jets to the fleet.
-	public void addJet() {
-		System.out.println("Add a jet");
+	public void addJet(Jet jet) {
+		Jet[] newJetsArray = new Jet[this.jetsArray.length + 1];
+		for (int i = 0; i < this.jetsArray.length; i++) {
+			newJetsArray[i] = this.jetsArray[i];
+		}
+		newJetsArray[newJetsArray.length-1] = jet;
+		this.jetsArray = newJetsArray;
 	}
 	
+	// Loops through the array of jets, adds a random pilot to jets.
+	public void assignRandomPilots() {
+		int count = 0;
+		while (count < this.jetsArray.length && count < this.pilots.length) {
+			int randomPilotIndex = (int)(Math.random() * this.pilots.length);
+			boolean currentPilotAlreadyAssigned = this.pilots[randomPilotIndex].getAssignedToJet();
+			
+			// Only assign the randomly chosen pilot if it isn't already assigned to a jet
+			if (currentPilotAlreadyAssigned == false) {
+				this.jetsArray[count].setPilot(this.pilots[randomPilotIndex]);
+				this.pilots[randomPilotIndex].setAssignedToJet(true);
+				count++;
+			}
+		}
+	}
+	// A user can add custom jets to the fleet.
+	public void addPilot(Pilot pilot) {
+		Pilot[] newPilotsArray = new Pilot[this.pilots.length + 1];
+		for (int i = 0; i < this.pilots.length; i++) {
+			newPilotsArray[i] = this.pilots[i];
+		}
+		newPilotsArray[newPilotsArray.length-1] = pilot;
+		this.pilots = newPilotsArray;
+	}
+	
+	public void listPilots() {
+		System.out.printf("%-30s %-10s %-20s\n", "Name", "Age", "Pay Grade");
+		for (Pilot pilot : this.pilots) {
+			System.out.printf("%-30s %-10s %-20s\n", pilot.getName(), pilot.getAge(), pilot.getPayGrade());
+		}
+	}
+	
+	public void setPilots(Pilot[] pilots) {
+		this.pilots = pilots;
+	}
+	
+	public Pilot[] getPilots() {
+		return this.pilots;
+	}
+	
+	
 	public void printHeader() {
-		System.out.printf("%-5s %-20s %-15s %-10s %-15s\n", "ID", "Model", "Speed", "Range", "Price");
+		System.out.printf("%-5s %-30s %-20s %-15s %-10s %-15s\n", "ID", "Pilot", "Model", "Speed", "Range", "Price");
 	}
 	
 	// Getters and Setters
