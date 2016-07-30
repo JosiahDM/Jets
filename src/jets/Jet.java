@@ -8,14 +8,15 @@ public class Jet {
 	private float speed;
 	private int range;
 	private float price;
-	private int jetId;
+	static int jetsTotal = 0;
+	private int jetId = 0;
 	
-	public Jet(String model, float speed, int range, float price, int jetId) {
+	public Jet(String model, float speed, int range, float price) {
 		this.model = model;
 		setSpeed(speed);
 		this.range = range;
 		this.price = price;
-		this.jetId = jetId;
+		this.jetId = ++jetsTotal;
 	}
 
 	// Methods

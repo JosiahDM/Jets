@@ -5,11 +5,11 @@ public class CommandCenter {
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		
-		Jet[] jets = { 	new Jet("747", 1200, 1000, 200000000f, 1),
-						new Jet("747", 1200, 1000, 200000000f, 1),
-						new Jet("747", 1200, 1000, 200000000f, 1),
-						new Jet("747", 1200, 1000, 200000000f, 1),
-						new Jet("747", 1200, 1000, 200000000f, 1)
+		Jet[] jets = { 	new Jet("747", 1200, 3000, 200000000f),
+						new Jet("747", 1200, 1000, 200000000f),
+						new Jet("747", 1200, 1000, 200000000f),
+						new Jet("747", 1400, 1000, 200000000f),
+						new Jet("747", 1200, 1000, 200000000f)
 						};
 		
 		Fleet theFleet = new Fleet("Furious Finnigan's Fleet", jets);
@@ -66,7 +66,7 @@ public class CommandCenter {
 			waitForKey(sc);
 			break;
 		case "5":
-			System.out.println("Exiting...");
+			System.out.println("*** Exited ***");
 			break;
 		default:
 			System.out.println("***Error***");
