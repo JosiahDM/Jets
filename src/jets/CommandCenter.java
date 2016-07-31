@@ -6,24 +6,24 @@ public class CommandCenter {
 	public static void main(String[] args) {
 		Scanner keyboard = new Scanner(System.in);
 		
-		Jet[] jets = { new Jet("7471", 1200, 3000, 200000000f), 
-				new Jet("7472", 1200, 1000, 200000000f),
-				new Jet("7473", 1200, 1000, 200000000f), 
-				new Jet("7474", 1400, 1000, 200000000f),
-				new Jet("7475", 1200, 1000, 200000000f) };
-		Fleet theFleet = new Fleet("Furious Finnigan's Fleet", jets);
-		
+		// Create the data
+		Jet[] jets = { new Jet("F/A-18 Hornet", 1190, 2069, 94000000f), 
+				new Jet("F-35 Lightning", 1199, 1379, 122000000f),
+				new Jet("F-22 Raptor", 1498, 1839, 350000000f), 
+				new Jet("B2 Bomber", 1400, 1000, 2400000000f),
+				new Jet("P8-A Poseidon", 564, 1381, 290000000f) };
 		Pilot[] pilots = { 
 				new Pilot("Cap'n Pablo Sharkchum", 50, "Cap'n"),
 				new Pilot("Barnacle Brain Ian", 30, "First Matey"),
-				new Pilot("Jim Beam", 28, "Cabin Boy"), 
-				new Pilot("Ron John", 28, "Cabin Boy"),  
-				new Pilot("Ron John", 28, "Cabin Boy")  
+				new Pilot("Cowardly Bart Hawkins", 16, "Cabin Boy"), 
+				new Pilot("Eye-Gougin' Hugo Slaughter", 28, "Swabbie"),  
+				new Pilot("Cap'n Baird Jellybones", 44, "Cap'n")  
 				};
-	
-		theFleet.setPilots(pilots);
-		theFleet.assignRandomPilots();
+		// Add data to Fleet
+		Fleet theFleet = new Fleet("Furious Finnigan's Fleet", jets, pilots);
 
+		System.out.println("*******         Fleet Command and Control Center         *******");
+		// main loop runs until user pushes 8 (or quits within the waitForKey() method)
 		String choice = "0";
 		do {
 			showMenu();
@@ -43,7 +43,8 @@ public class CommandCenter {
 		System.out.println("7) List pilots");
 		System.out.println("8) Quit");
 	}
-
+	
+	// Returns validated user choice.
 	public static String getChoice(Scanner sc) {
 		String choice = "0";
 		while ("12345678".indexOf(choice.charAt(0)) < 0) {
@@ -59,7 +60,8 @@ public class CommandCenter {
 		}
 		return choice;
 	}
-
+	
+	// Switch on the previously validated user choice.
 	public static void doChoice(String choice, Fleet fleet, Scanner sc) {
 		switch (choice) {
 		case "1":
@@ -92,7 +94,7 @@ public class CommandCenter {
 			waitForKey(sc, 1);
 			break;
 		case "7":
-			System.out.println("***********        All Pilots         *********");
+			System.out.println("***********        All Pilots         ***********");
 			fleet.listPilots();
 			waitForKey(sc, 1);
 			break;
@@ -105,7 +107,8 @@ public class CommandCenter {
 			break;
 		}
 	}
-
+	
+	// Gets user input to create a new Jet.
 	public static Jet createJetFromUserInput(Scanner sc) {
 		System.out.print("Enter the model of the new jet: ");
 		sc.nextLine();
@@ -134,7 +137,7 @@ public class CommandCenter {
 		Pilot pilot = new Pilot(name, age, payGrade);
 		return pilot;
 	}
-
+	// Use this wherever getting number input from user to validate input.
 	public static float promptForNumber(Scanner sc, String msg) {
 		float outValue = 0;
 		boolean valid = false;
@@ -150,7 +153,8 @@ public class CommandCenter {
 		}
 		return outValue;
 	}
-	
+	// This could maybe go into the Fleet class, but makes sense as a
+	// Command Center method. 
 	public static Pilot checkForPilot(String pilotName, Fleet fleet) {
 		Pilot[] pilots = fleet.getPilots();
 		Pilot pilotOut = null;
@@ -194,7 +198,8 @@ public class CommandCenter {
 							   	"jet of ID: " + jet.getJetId() + " ***");
 		}
 	}
-	
+	// Rather than displaying results and immediately blasting a new menu up,
+	// do a nextLine() to wait for the user to continue.
 	public static void waitForKey(Scanner sc, int flag) {
 		System.out.println("Press ENTER key to continue. 'Q' to quit...");
 		if (flag > 0) { // Turn flag on if the last item read requires nextLine() to clear it

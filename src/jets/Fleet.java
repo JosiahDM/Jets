@@ -10,10 +10,17 @@ public class Fleet {
 		this.jetsArray = jetsArray;
 	}
 	
+	public Fleet(String name, Jet[] jetsArray, Pilot[] pilots) {
+		this.name = name;
+		this.jetsArray = jetsArray;
+		this.pilots = pilots;
+		this.assignRandomPilots();
+	}
 	// Methods
 	
 	// List fleet prints out the model, speed, range, and price of each jet in fleet.
 	public void listFleet() {
+		System.out.println("***********           Display Fleet           ***********");
 		printHeader();
 		for (Jet jet : jetsArray) {
 			jet.display();
@@ -79,7 +86,7 @@ public class Fleet {
 			}
 		}
 	}
-	// A user can add custom jets to the fleet.
+	// Add a pilot to Fleet
 	public void addPilot(Pilot pilot) {
 		Pilot[] newPilotsArray = new Pilot[this.pilots.length + 1];
 		for (int i = 0; i < this.pilots.length; i++) {
@@ -106,7 +113,7 @@ public class Fleet {
 	
 	
 	public void printHeader() {
-		System.out.printf("%-5s %-30s %-20s %-15s %-10s %-15s\n", "ID", "Pilot", "Model", "Speed", "Range", "Price");
+		System.out.printf("%-5s %-30s %-20s %-15s %-10s %-15s\n", "ID", "Pilot", "Model", "Speed", "Range(mi)", "Price");
 	}
 	
 	// Getters and Setters
