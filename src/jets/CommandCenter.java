@@ -33,7 +33,7 @@ public class CommandCenter {
 	}
 
 	public static void showMenu() {
-		System.out.println("Choose your option (Press key 1-8): ");
+		System.out.println("***     Main Menu    *** \nChoose your option (Press key 1-8): ");
 		System.out.println("1) List entire fleet");
 		System.out.println("2) View fastest jet");
 		System.out.println("3) View jet with longest range.");
